@@ -85,7 +85,7 @@ type
     procedure devListSelect(Sender: TObject);
   private
     { Private declarations }
-    analogAxesFrames: array [0..4] of TAnalogAxisFrame;
+    analogAxesFrames: array [0..6] of TAnalogAxisFrame;
     buttonsState: array [1..32] of TPanel;
     gainFrames: array [0..12] of TGainFrame;
     procedure makeVisible(visible:boolean);
@@ -221,7 +221,7 @@ begin
 
     //Create analog axes controls
     top:=axisSteerGrp.Height;
-    for I := 0 to 4 do
+    for I := 0 to 6 do
     begin
       analogAxesFrames[i]:=TAnalogAxisFrame.Create(MainForm);
       analogAxesFrames[i].Align:=alBottom;
@@ -237,6 +237,8 @@ begin
         2: analogAxesFrames[i].Group.Caption:='Axis #3 (rX - Clutch)';
         3: analogAxesFrames[i].Group.Caption:='Axis #4 (rY - Aux1)';
         4: analogAxesFrames[i].Group.Caption:='Axis #5 (rZ - Aux2)';
+        5: analogAxesFrames[i].Group.Caption:='Axis #6 (Slider - Aux3)';
+        6: analogAxesFrames[i].Group.Caption:='Axis #7 (Dial - Aux4)';
       end;
     end;
       buttonsGrp.Top:=top;
@@ -592,7 +594,7 @@ begin
     CMD_GET_ANALOG  :
       begin
         inc(currentDataIndex);
-        if currentDataIndex>4 then
+        if currentDataIndex>6 then
         begin
           currentDataType:=CMD_GET_BUTTONS;
           currentDataIndex:=0;
