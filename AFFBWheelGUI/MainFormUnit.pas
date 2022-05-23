@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, ExtCtrls,
   JvHidControllerClass,JvComponentBase,
-  analogAxis, gain;
+  analogAxis, gain, Math;
 
 type
   TMainForm = class(TForm)
@@ -57,6 +57,8 @@ type
     buttonsPanel: TPanel;
     Velocity: TLabeledEdit;
     Acceleration: TLabeledEdit;
+    SteerPos: TPaintBox;
+    SteerAngle: TLabeledEdit;
     procedure HidCtlDeviceChange(Sender: TObject);
     function HidCtlEnumerate(HidDev: TJvHidDevice;
       const Idx: Integer): Boolean;
@@ -83,6 +85,8 @@ type
     procedure saveEEClick(Sender: TObject);
     procedure HidCtlDeviceUnplug(HidDev: TJvHidDevice);
     procedure devListSelect(Sender: TObject);
+    procedure HidCtlDeviceCreateError(Controller: TJvHidDeviceController;
+      PnPInfo: TJvHidPnPInfo; var Handled, RetryCreate: Boolean);
   private
     { Private declarations }
     analogAxesFrames: array [0..6] of TAnalogAxisFrame;
@@ -92,6 +96,7 @@ type
   public
     { Public declarations }
     procedure  sendCommand(command:Byte;arg1:SmallInt=0;arg2:SmallInt=0;arg3:SmallInt=0);
+    procedure  drawWheel(range, pos:SmallInt);
   end;
 
   TDrawPanel = class(TPanel);
@@ -307,6 +312,12 @@ begin
     HidCtl.Enumerate;
 end;
 
+procedure TMainForm.HidCtlDeviceCreateError(Controller: TJvHidDeviceController;
+  PnPInfo: TJvHidPnPInfo; var Handled, RetryCreate: Boolean);
+begin
+  Handled:=true;
+end;
+
 function TMainForm.HidCtlEnumerate(HidDev: TJvHidDevice;
   const Idx: Integer): Boolean;
 var
@@ -350,7 +361,7 @@ var
   buttonsDataReport: TButtonsDataReport;
   gainDataReport: TGainDataReport;
   miscDataReport: TMiscDataReport;
-
+  angle: Double;
   analogAxisF: TAnalogAxisFrame;
 begin
     //ignore reports with other reportID
@@ -409,6 +420,8 @@ begin
                steerBarVal.Width:=round(-steerBar.Width * steeringAxisDataReport.value / 65536);
                steerBarVal.Left:=round(steerBar.Width/2)-steerBarVal.Width;
              end;
+
+             drawWheel(steeringAxisDataReport.range, steeringAxisDataReport.value);
          end;
       CMD_GET_ANALOG:  begin
 
@@ -536,6 +549,44 @@ begin
           end;
     end;
 end;
+
+procedure TMainForm.DrawWheel(range,pos:SmallInt);
+var
+  angle: Double;
+  cx,cy:  integer;
+  radius: integer;
+
+begin
+
+     angle:= (range / 2) *  pos / 32768;
+
+     SteerAngle.Text:=floattostrf(angle,ffFixed,8,2)+'°';
+
+     //SteerPos.Canvas.Brush.Style:=bsClear;
+     SteerPos.Canvas.Brush.Color:=SteerPos.Color;
+     SteerPos.Canvas.FillRect(SteerPos.ClientRect);
+
+     SteerPos.Canvas.pen.Color:=clBlack;
+     SteerPos.Canvas.Pen.Width:=1;
+     //
+     SteerPos.Canvas.Ellipse(1,1,SteerPos.Width-1,SteerPos.Height-1);
+
+     cx:=round(SteerPos.Width/2);
+     cy:=round(SteerPos.Height/2);
+     radius:=round(SteerPos.Height/2)-1;
+
+
+     SteerPos.Canvas.MoveTo(cx, cy);
+     SteerPos.Canvas.LineTo(cx + round(radius * Cos(DegToRad(angle-10))), cy + round(radius * Sin(DegToRad(angle-10))));
+
+     SteerPos.Canvas.MoveTo(cx, cy);
+     SteerPos.Canvas.LineTo(cx + round(radius * Cos(DegToRad(angle+90))), cy + round(radius * Sin(DegToRad(angle+90))));
+
+     SteerPos.Canvas.MoveTo(cx, cy);
+     SteerPos.Canvas.LineTo(cx + round(radius * Cos(DegToRad(angle+180+10))), cy + round(radius * Sin(DegToRad(angle+180+10))));
+
+end;
+
 
 procedure TMainForm.HidCtlDeviceUnplug(HidDev: TJvHidDevice);
 var

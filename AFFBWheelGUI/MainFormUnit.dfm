@@ -1,41 +1,46 @@
 object MainForm: TMainForm
-  Left = 571
-  Top = 151
+  Left = 549
+  Top = 150
   Caption = 'AFFBWheel settings'
   ClientHeight = 721
-  ClientWidth = 817
+  ClientWidth = 784
   Color = clBtnFace
+  Constraints.MinWidth = 530
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesigned
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 817
+    Width = 784
     Height = 649
     Align = alClient
     Caption = 'No connection'
     TabOrder = 0
+    ExplicitWidth = 817
     object PageControl: TPageControl
       Left = 1
       Top = 1
-      Width = 815
+      Width = 782
       Height = 647
       ActivePage = ts1
       Align = alClient
       TabOrder = 0
+      ExplicitWidth = 815
       object ts1: TTabSheet
         Caption = 'Inputs'
+        ExplicitWidth = 807
         object Axes: TScrollBox
           Left = 0
           Top = 0
-          Width = 807
+          Width = 774
           Height = 619
           Align = alClient
           BorderStyle = bsNone
@@ -44,21 +49,24 @@ object MainForm: TMainForm
           ParentColor = False
           ParentDoubleBuffered = False
           TabOrder = 0
+          ExplicitWidth = 807
           object axisSteerGrp: TGroupBox
             Left = 0
             Top = 0
-            Width = 807
+            Width = 774
             Height = 96
             Align = alTop
             Caption = 'Axis #0 (X - Steering)'
-            Color = clBtnFace
             Constraints.MinWidth = 384
             Ctl3D = True
+            ParentBackground = False
             ParentColor = False
             ParentCtl3D = False
             TabOrder = 0
+            ExplicitTop = 7
+            ExplicitWidth = 807
             DesignSize = (
-              807
+              774
               96)
             object steerRangeLabel: TLabel
               Left = 8
@@ -68,7 +76,7 @@ object MainForm: TMainForm
               Caption = 'Range:'
             end
             object steerPercent: TLabel
-              Left = 546
+              Left = 513
               Top = 69
               Width = 25
               Height = 13
@@ -82,6 +90,12 @@ object MainForm: TMainForm
               Font.Style = [fsBold]
               ParentFont = False
               ExplicitLeft = 563
+            end
+            object SteerPos: TPaintBox
+              Left = 119
+              Top = 43
+              Width = 48
+              Height = 48
             end
             object steerRange: TComboBox
               Left = 56
@@ -111,17 +125,18 @@ object MainForm: TMainForm
             object steerBar: TPanel
               Left = 119
               Top = 20
-              Width = 679
+              Width = 646
               Height = 17
               Anchors = [akLeft, akTop, akRight]
               BevelKind = bkFlat
               BevelOuter = bvNone
               TabOrder = 2
+              ExplicitWidth = 679
               DesignSize = (
-                675
+                642
                 13)
               object steerBarVal: TPanel
-                Left = 415
+                Left = 394
                 Top = 0
                 Width = 41
                 Height = 17
@@ -130,10 +145,11 @@ object MainForm: TMainForm
                 Color = clHotLight
                 ParentBackground = False
                 TabOrder = 0
+                ExplicitLeft = 415
               end
             end
             object steerValue: TLabeledEdit
-              Left = 626
+              Left = 593
               Top = 67
               Width = 49
               Height = 19
@@ -148,9 +164,10 @@ object MainForm: TMainForm
               ParentCtl3D = False
               ReadOnly = True
               TabOrder = 3
+              ExplicitLeft = 626
             end
             object steerRaw: TLabeledEdit
-              Left = 611
+              Left = 578
               Top = 43
               Width = 64
               Height = 19
@@ -166,9 +183,10 @@ object MainForm: TMainForm
               ParentCtl3D = False
               ReadOnly = True
               TabOrder = 4
+              ExplicitLeft = 611
             end
             object Velocity: TLabeledEdit
-              Left = 749
+              Left = 716
               Top = 43
               Width = 49
               Height = 19
@@ -183,9 +201,10 @@ object MainForm: TMainForm
               ParentCtl3D = False
               ReadOnly = True
               TabOrder = 5
+              ExplicitLeft = 749
             end
             object Acceleration: TLabeledEdit
-              Left = 749
+              Left = 716
               Top = 67
               Width = 49
               Height = 19
@@ -200,20 +219,37 @@ object MainForm: TMainForm
               ParentCtl3D = False
               ReadOnly = True
               TabOrder = 6
+              ExplicitLeft = 749
+            end
+            object SteerAngle: TLabeledEdit
+              Left = 173
+              Top = 56
+              Width = 52
+              Height = 19
+              Alignment = taRightJustify
+              Color = cl3DLight
+              Ctl3D = False
+              EditLabel.Width = 31
+              EditLabel.Height = 13
+              EditLabel.Caption = 'Angle:'
+              ParentCtl3D = False
+              ReadOnly = True
+              TabOrder = 7
             end
           end
           object buttonsGrp: TGroupBox
             Left = 0
             Top = 96
-            Width = 807
+            Width = 774
             Height = 72
             Align = alTop
             Caption = 'Buttons'
             Color = clBtnFace
             ParentColor = False
             TabOrder = 1
+            ExplicitWidth = 807
             DesignSize = (
-              807
+              774
               72)
             object centerButtonLabel: TLabel
               Left = 8
@@ -248,11 +284,12 @@ object MainForm: TMainForm
             object buttonsPanel: TPanel
               Left = 144
               Top = 15
-              Width = 661
+              Width = 628
               Height = 55
               Anchors = [akLeft, akTop, akRight, akBottom]
               BevelOuter = bvNone
               TabOrder = 2
+              ExplicitWidth = 661
             end
           end
         end
@@ -260,24 +297,20 @@ object MainForm: TMainForm
       object ts3: TTabSheet
         Caption = 'Force Feedback'
         ImageIndex = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 824
-        ExplicitHeight = 618
+        ExplicitWidth = 807
         object GainGroupBox: TGroupBox
           Left = 0
           Top = 0
-          Width = 508
+          Width = 475
           Height = 619
           Align = alClient
           Caption = 'Effect gains'
           TabOrder = 0
-          ExplicitWidth = 525
-          ExplicitHeight = 618
+          ExplicitWidth = 508
           object Gains: TScrollBox
             Left = 2
             Top = 15
-            Width = 504
+            Width = 471
             Height = 602
             Align = alClient
             BevelInner = bvNone
@@ -288,12 +321,11 @@ object MainForm: TMainForm
             ParentColor = False
             ParentCtl3D = False
             TabOrder = 0
-            ExplicitWidth = 521
-            ExplicitHeight = 601
+            ExplicitWidth = 504
           end
         end
         object miscPanel: TPanel
-          Left = 508
+          Left = 475
           Top = 0
           Width = 299
           Height = 619
@@ -301,8 +333,7 @@ object MainForm: TMainForm
           BevelOuter = bvNone
           Padding.Left = 5
           TabOrder = 1
-          ExplicitLeft = 525
-          ExplicitHeight = 618
+          ExplicitLeft = 508
           object miscGroupbox: TGroupBox
             Left = 5
             Top = 0
@@ -311,7 +342,6 @@ object MainForm: TMainForm
             Align = alTop
             Caption = 'Misc'
             TabOrder = 0
-            ExplicitLeft = 6
             DesignSize = (
               294
               273)
@@ -496,12 +526,13 @@ object MainForm: TMainForm
   object ControlPanel: TPanel
     Left = 0
     Top = 649
-    Width = 817
+    Width = 784
     Height = 72
     Align = alBottom
     TabOrder = 1
+    ExplicitWidth = 817
     DesignSize = (
-      817
+      784
       72)
     object Version: TLabel
       Left = 5
@@ -511,7 +542,7 @@ object MainForm: TMainForm
       Caption = 'Version: 1.0'
     end
     object loadDefaults: TButton
-      Left = 450
+      Left = 417
       Top = 6
       Width = 177
       Height = 25
@@ -519,9 +550,10 @@ object MainForm: TMainForm
       Caption = 'Reset settings to defaults'
       TabOrder = 0
       OnClick = loadDefaultsClick
+      ExplicitLeft = 450
     end
     object loadEE: TButton
-      Left = 633
+      Left = 600
       Top = 6
       Width = 177
       Height = 25
@@ -529,9 +561,10 @@ object MainForm: TMainForm
       Caption = 'Load settings from EEPROM'
       TabOrder = 1
       OnClick = loadEEClick
+      ExplicitLeft = 633
     end
     object saveEE: TButton
-      Left = 633
+      Left = 600
       Top = 37
       Width = 177
       Height = 25
@@ -539,6 +572,7 @@ object MainForm: TMainForm
       Caption = 'Save settings to EEPROM'
       TabOrder = 2
       OnClick = saveEEClick
+      ExplicitLeft = 633
     end
     object devList: TComboBox
       Left = 5
@@ -553,6 +587,7 @@ object MainForm: TMainForm
   object HidCtl: TJvHidDeviceController
     OnEnumerate = HidCtlEnumerate
     OnDeviceChange = HidCtlDeviceChange
+    OnDeviceCreateError = HidCtlDeviceCreateError
     OnDeviceData = HidCtlDeviceData
     OnDeviceUnplug = HidCtlDeviceUnplug
     Left = 40
