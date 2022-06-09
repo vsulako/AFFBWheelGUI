@@ -2,7 +2,7 @@ object AnalogAxisFrame: TAnalogAxisFrame
   Left = 0
   Top = 0
   Width = 642
-  Height = 90
+  Height = 100
   Margins.Left = 0
   Margins.Top = 0
   Margins.Right = 0
@@ -12,7 +12,7 @@ object AnalogAxisFrame: TAnalogAxisFrame
     Left = 0
     Top = 0
     Width = 642
-    Height = 90
+    Height = 100
     Align = alClient
     Caption = 'Axis #1 (Y - Accelerator)'
     Color = clBtnFace
@@ -21,9 +21,10 @@ object AnalogAxisFrame: TAnalogAxisFrame
     ParentColor = False
     ParentCtl3D = False
     TabOrder = 0
+    ExplicitLeft = 3
     DesignSize = (
       642
-      90)
+      100)
     object Percent: TLabel
       Left = 506
       Top = 66
@@ -38,6 +39,13 @@ object AnalogAxisFrame: TAnalogAxisFrame
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+    end
+    object labelTrim: TLabel
+      Left = 316
+      Top = 74
+      Width = 24
+      Height = 13
+      Caption = 'Trim:'
     end
     object Max: TLabeledEdit
       Left = 32
@@ -69,7 +77,7 @@ object AnalogAxisFrame: TAnalogAxisFrame
     end
     object autoLimit: TCheckBox
       Left = 18
-      Top = 69
+      Top = 70
       Width = 81
       Height = 17
       Caption = 'Autolimit'
@@ -196,6 +204,33 @@ object AnalogAxisFrame: TAnalogAxisFrame
       Caption = 'Set Center'
       TabOrder = 11
       OnClick = setCenterClick
+    end
+    object outputDisabled: TCheckBox
+      Left = 194
+      Top = 71
+      Width = 103
+      Height = 17
+      Caption = 'Output disabled'
+      TabOrder = 12
+      OnClick = outputDisabledClick
+    end
+    object bitTrim: TComboBox
+      Left = 346
+      Top = 71
+      Width = 87
+      Height = 21
+      Style = csDropDownList
+      TabOrder = 13
+      OnChange = bitTrimChange
+      Items.Strings = (
+        'none'
+        '1 bit (/2)'
+        '2 bit (/4)'
+        '3 bit (/8)'
+        '4 bit (/16)'
+        '5 bit (/32)'
+        '6 bit (/64)'
+        '7 bit (/128)')
     end
   end
 end

@@ -24,6 +24,9 @@ type
     setCenter: TButton;
     BarVal: TPanel;
     Percent: TLabel;
+    outputDisabled: TCheckBox;
+    bitTrim: TComboBox;
+    labelTrim: TLabel;
     procedure setMinClick(Sender: TObject);
     procedure setMaxClick(Sender: TObject);
     procedure setCenterClick(Sender: TObject);
@@ -33,6 +36,8 @@ type
     procedure hasCenterClick(Sender: TObject);
     procedure CenterChange(Sender: TObject);
     procedure DeadZoneChange(Sender: TObject);
+    procedure outputDisabledClick(Sender: TObject);
+    procedure bitTrimChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -58,6 +63,16 @@ begin
     else
       MainForm.sendCommand(CMD_SET_AAAUTOLIM, axisNum, 0);
 
+end;
+
+procedure TAnalogAxisFrame.bitTrimChange(Sender: TObject);
+begin
+   if not TWinControl(Sender).Focused then Exit;
+
+   if outputDisabled.Checked then
+      MainForm.sendCommand(CMD_SET_ODTRIM, axisNum, 1, bitTrim.ItemIndex)
+    else
+      MainForm.sendCommand(CMD_SET_ODTRIM, axisNum, 0, bitTrim.ItemIndex);
 end;
 
 procedure TAnalogAxisFrame.CenterChange(Sender: TObject);
@@ -94,6 +109,18 @@ begin
 
 end;
 
+procedure TAnalogAxisFrame.outputDisabledClick(Sender: TObject);
+begin
+    if not outputDisabled.Focused then
+      Exit;
+
+    if outputDisabled.Checked then
+      MainForm.sendCommand(CMD_SET_ODTRIM, axisNum, 1, bitTrim.ItemIndex)
+    else
+      MainForm.sendCommand(CMD_SET_ODTRIM, axisNum, 0, bitTrim.ItemIndex);
+end;
+
+
 procedure TAnalogAxisFrame.MaxChange(Sender: TObject);
 var
   val:Integer;
@@ -116,6 +143,8 @@ begin
     if val<=strtoint(Max.Text) then
       MainForm.sendCommand(CMD_SET_AALIMITS, axisNum, val, strtoint(Max.Text));
 end;
+
+
 
 
 

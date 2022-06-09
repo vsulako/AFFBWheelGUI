@@ -59,6 +59,8 @@ type
     Acceleration: TLabeledEdit;
     SteerPos: TPaintBox;
     SteerAngle: TLabeledEdit;
+    endstopOffset: TLabeledEdit;
+    endstopWidth: TLabeledEdit;
     procedure HidCtlDeviceChange(Sender: TObject);
     function HidCtlEnumerate(HidDev: TJvHidDevice;
       const Idx: Integer): Boolean;
@@ -87,6 +89,7 @@ type
     procedure devListSelect(Sender: TObject);
     procedure HidCtlDeviceCreateError(Controller: TJvHidDeviceController;
       PnPInfo: TJvHidPnPInfo; var Handled, RetryCreate: Boolean);
+    procedure endstopOffsetChange(Sender: TObject);
   private
     { Private declarations }
     analogAxesFrames: array [0..6] of TAnalogAxisFrame;
@@ -139,6 +142,8 @@ type
      deadZone:  SmallInt;
      autoLimit: Byte;
      hasCenter: Byte;
+     outputDisabled: Byte;
+     bitTrim:   Byte;
   end;
   PAnalogAxisDataReport = ^TAnalogAxisDataReport;
 
@@ -162,6 +167,9 @@ type
      cutForce:    SmallInt;
 
      ffbBD:       Byte;
+
+     endstopOffset:   SmallInt;
+     endstopWidth:    SmallInt;
   end;
   PMiscDataReport = ^TMiscDataReport;
 
@@ -200,6 +208,8 @@ Const
     MISC_MAXF     = 4;
     MISC_CUTF     = 5;
     MISC_FFBBD    = 6;
+    MISC_ENDSTOP  = 7;
+  CMD_SET_ODTRIM    = 19;
 
   CMD_EELOAD  = 20;
   CMD_EESAVE  = 21;
@@ -441,6 +451,11 @@ begin
            if not analogAxisF.DeadZone.Focused then
              analogAxisF.DeadZone.Text:=IntToStr(analogAxisDataReport.deadZone);
 
+           if not analogAxisF.outputDisabled.Focused then
+             analogAxisF.outputDisabled.Checked:=(analogAxisDataReport.outputDisabled>0);
+           if not analogAxisF.bitTrim.Focused then
+             analogAxisF.bitTrim.ItemIndex:=analogAxisDataReport.bitTrim;
+
            if (analogAxisDataReport.hasCenter=0) then
            begin
              analogAxisF.BarVal.Left:=0;
@@ -472,6 +487,7 @@ begin
           analogAxisF.Max.ReadOnly:= analogAxisF.autolimit.Checked;
           analogAxisF.Center.Enabled:=analogAxisF.hasCenter.Checked;
           analogAxisF.DeadZone.Enabled:=analogAxisF.hasCenter.Checked;
+
 
          end;
       CMD_GET_BUTTONS: begin
@@ -546,6 +562,12 @@ begin
 
               if not ffbBD.Focused then
                 ffbBD.ItemIndex:=miscDataReport.ffbBD-8;
+
+              if not endstopOffset.Focused then
+                endstopOffset.Text:=inttostr(miscDataReport.endstopOffset);
+              if not endstopWidth.Focused then
+                endstopWidth.Text:=inttostr(miscDataReport.endstopWidth);
+
           end;
     end;
 end;
@@ -586,6 +608,8 @@ begin
      SteerPos.Canvas.LineTo(cx + round(radius * Cos(DegToRad(angle+180+10))), cy + round(radius * Sin(DegToRad(angle+180+10))));
 
 end;
+
+
 
 
 procedure TMainForm.HidCtlDeviceUnplug(HidDev: TJvHidDevice);
@@ -777,6 +801,17 @@ begin
     if TryStrToInt(maxAcc.Text, val) then
     if (val>=0) and (val<32767) then
       sendCommand(CMD_SET_MISC, MISC_MAXACC, val);
+end;
+
+procedure TMainForm.endstopOffsetChange(Sender: TObject);
+var
+  offset,width:Integer;
+begin
+    if not TWinControl(Sender).Focused then Exit;
+
+    if TryStrToInt(endstopOffset.Text, offset) and TryStrToInt(endstopWidth.Text, width) then
+    if (offset>=0) and (offset<16383) and (width>=0) and (width<32767) then
+      sendCommand(CMD_SET_MISC, MISC_ENDSTOP, offset, width);
 end;
 
 procedure TMainForm.maxForceChange(Sender: TObject);

@@ -24,7 +24,6 @@ object MainForm: TMainForm
     Align = alClient
     Caption = 'No connection'
     TabOrder = 0
-    ExplicitWidth = 817
     object PageControl: TPageControl
       Left = 1
       Top = 1
@@ -33,10 +32,8 @@ object MainForm: TMainForm
       ActivePage = ts1
       Align = alClient
       TabOrder = 0
-      ExplicitWidth = 815
       object ts1: TTabSheet
         Caption = 'Inputs'
-        ExplicitWidth = 807
         object Axes: TScrollBox
           Left = 0
           Top = 0
@@ -49,7 +46,6 @@ object MainForm: TMainForm
           ParentColor = False
           ParentDoubleBuffered = False
           TabOrder = 0
-          ExplicitWidth = 807
           object axisSteerGrp: TGroupBox
             Left = 0
             Top = 0
@@ -63,8 +59,6 @@ object MainForm: TMainForm
             ParentColor = False
             ParentCtl3D = False
             TabOrder = 0
-            ExplicitTop = 7
-            ExplicitWidth = 807
             DesignSize = (
               774
               96)
@@ -131,7 +125,6 @@ object MainForm: TMainForm
               BevelKind = bkFlat
               BevelOuter = bvNone
               TabOrder = 2
-              ExplicitWidth = 679
               DesignSize = (
                 642
                 13)
@@ -145,7 +138,6 @@ object MainForm: TMainForm
                 Color = clHotLight
                 ParentBackground = False
                 TabOrder = 0
-                ExplicitLeft = 415
               end
             end
             object steerValue: TLabeledEdit
@@ -164,7 +156,6 @@ object MainForm: TMainForm
               ParentCtl3D = False
               ReadOnly = True
               TabOrder = 3
-              ExplicitLeft = 626
             end
             object steerRaw: TLabeledEdit
               Left = 578
@@ -183,7 +174,6 @@ object MainForm: TMainForm
               ParentCtl3D = False
               ReadOnly = True
               TabOrder = 4
-              ExplicitLeft = 611
             end
             object Velocity: TLabeledEdit
               Left = 716
@@ -201,7 +191,6 @@ object MainForm: TMainForm
               ParentCtl3D = False
               ReadOnly = True
               TabOrder = 5
-              ExplicitLeft = 749
             end
             object Acceleration: TLabeledEdit
               Left = 716
@@ -219,7 +208,6 @@ object MainForm: TMainForm
               ParentCtl3D = False
               ReadOnly = True
               TabOrder = 6
-              ExplicitLeft = 749
             end
             object SteerAngle: TLabeledEdit
               Left = 173
@@ -247,7 +235,6 @@ object MainForm: TMainForm
             Color = clBtnFace
             ParentColor = False
             TabOrder = 1
-            ExplicitWidth = 807
             DesignSize = (
               774
               72)
@@ -289,7 +276,6 @@ object MainForm: TMainForm
               Anchors = [akLeft, akTop, akRight, akBottom]
               BevelOuter = bvNone
               TabOrder = 2
-              ExplicitWidth = 661
             end
           end
         end
@@ -297,7 +283,6 @@ object MainForm: TMainForm
       object ts3: TTabSheet
         Caption = 'Force Feedback'
         ImageIndex = 2
-        ExplicitWidth = 807
         object GainGroupBox: TGroupBox
           Left = 0
           Top = 0
@@ -306,7 +291,6 @@ object MainForm: TMainForm
           Align = alClient
           Caption = 'Effect gains'
           TabOrder = 0
-          ExplicitWidth = 508
           object Gains: TScrollBox
             Left = 2
             Top = 15
@@ -321,7 +305,6 @@ object MainForm: TMainForm
             ParentColor = False
             ParentCtl3D = False
             TabOrder = 0
-            ExplicitWidth = 504
           end
         end
         object miscPanel: TPanel
@@ -333,18 +316,19 @@ object MainForm: TMainForm
           BevelOuter = bvNone
           Padding.Left = 5
           TabOrder = 1
-          ExplicitLeft = 508
+          ExplicitLeft = 479
+          ExplicitTop = -1
           object miscGroupbox: TGroupBox
             Left = 5
             Top = 0
             Width = 294
-            Height = 273
+            Height = 329
             Align = alTop
             Caption = 'Misc'
             TabOrder = 0
             DesignSize = (
               294
-              273)
+              329)
             object ffbpwmlabel: TLabel
               Left = 26
               Top = 236
@@ -518,6 +502,34 @@ object MainForm: TMainForm
               TickMarks = tmTopLeft
               OnChange = minForceTrackbarChange
             end
+            object endstopOffset: TLabeledEdit
+              Left = 229
+              Top = 271
+              Width = 57
+              Height = 21
+              Alignment = taRightJustify
+              Anchors = [akTop, akRight]
+              EditLabel.Width = 75
+              EditLabel.Height = 13
+              EditLabel.Caption = 'Endstop offset:'
+              LabelPosition = lpLeft
+              TabOrder = 10
+              OnChange = endstopOffsetChange
+            end
+            object endstopWidth: TLabeledEdit
+              Left = 229
+              Top = 298
+              Width = 57
+              Height = 21
+              Alignment = taRightJustify
+              Anchors = [akTop, akRight]
+              EditLabel.Width = 72
+              EditLabel.Height = 13
+              EditLabel.Caption = 'Endstop width:'
+              LabelPosition = lpLeft
+              TabOrder = 11
+              OnChange = endstopOffsetChange
+            end
           end
         end
       end
@@ -530,7 +542,6 @@ object MainForm: TMainForm
     Height = 72
     Align = alBottom
     TabOrder = 1
-    ExplicitWidth = 817
     DesignSize = (
       784
       72)
@@ -550,7 +561,6 @@ object MainForm: TMainForm
       Caption = 'Reset settings to defaults'
       TabOrder = 0
       OnClick = loadDefaultsClick
-      ExplicitLeft = 450
     end
     object loadEE: TButton
       Left = 600
@@ -561,7 +571,6 @@ object MainForm: TMainForm
       Caption = 'Load settings from EEPROM'
       TabOrder = 1
       OnClick = loadEEClick
-      ExplicitLeft = 633
     end
     object saveEE: TButton
       Left = 600
@@ -572,7 +581,6 @@ object MainForm: TMainForm
       Caption = 'Save settings to EEPROM'
       TabOrder = 2
       OnClick = saveEEClick
-      ExplicitLeft = 633
     end
     object devList: TComboBox
       Left = 5
