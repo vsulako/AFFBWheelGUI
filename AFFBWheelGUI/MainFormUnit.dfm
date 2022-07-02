@@ -46,6 +46,8 @@ object MainForm: TMainForm
           ParentColor = False
           ParentDoubleBuffered = False
           TabOrder = 0
+          OnMouseWheelDown = AxesMouseWheelDown
+          OnMouseWheelUp = AxesMouseWheelUp
           object axisSteerGrp: TGroupBox
             Left = 0
             Top = 0
@@ -316,8 +318,6 @@ object MainForm: TMainForm
           BevelOuter = bvNone
           Padding.Left = 5
           TabOrder = 1
-          ExplicitLeft = 479
-          ExplicitTop = -1
           object miscGroupbox: TGroupBox
             Left = 5
             Top = 0

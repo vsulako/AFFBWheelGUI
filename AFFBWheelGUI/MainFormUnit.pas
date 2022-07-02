@@ -90,6 +90,10 @@ type
     procedure HidCtlDeviceCreateError(Controller: TJvHidDeviceController;
       PnPInfo: TJvHidPnPInfo; var Handled, RetryCreate: Boolean);
     procedure endstopOffsetChange(Sender: TObject);
+    procedure AxesMouseWheelDown(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure AxesMouseWheelUp(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
   private
     { Private declarations }
     analogAxesFrames: array [0..6] of TAnalogAxisFrame;
@@ -456,26 +460,36 @@ begin
            if not analogAxisF.bitTrim.Focused then
              analogAxisF.bitTrim.ItemIndex:=analogAxisDataReport.bitTrim;
 
-           if (analogAxisDataReport.hasCenter=0) then
-           begin
-             analogAxisF.BarVal.Left:=0;
-             analogAxisF.BarVal.Width:=round(analogAxisF.Bar.Width * (analogAxisDataReport.value+32768) / 65536);
 
-             analogAxisF.Percent.Caption:=inttostr(round((analogAxisDataReport.value+32768) * 100 / 65536)) + '%';
+           if (analogAxisDataReport.outputDisabled=0) then
+           begin
+             if (analogAxisDataReport.hasCenter=0) then
+             begin
+               analogAxisF.BarVal.Left:=0;
+               analogAxisF.BarVal.Width:=round(analogAxisF.Bar.Width * (analogAxisDataReport.value+32768) / 65536);
+
+               analogAxisF.Percent.Caption:=inttostr(round((analogAxisDataReport.value+32768) * 100 / 65536)) + '%';
+             end
+             else
+             begin
+               if analogAxisDataReport.value>0 then
+                 begin
+                   analogAxisF.BarVal.Width:=round(analogAxisF.Bar.Width * analogAxisDataReport.value / 65536);
+                   analogAxisF.BarVal.Left:=round(analogAxisF.Bar.Width/2);
+                 end
+                 else
+                 begin
+                   analogAxisF.BarVal.Width:=round(-analogAxisF.Bar.Width * analogAxisDataReport.value / 65536);
+                   analogAxisF.BarVal.Left:=round(analogAxisF.Bar.Width/2)-analogAxisF.BarVal.Width;
+                 end;
+               analogAxisF.Percent.Caption:=inttostr(round(analogAxisDataReport.value * 100 / 32768)) + '%';
+             end;
            end
            else
            begin
-             if analogAxisDataReport.value>0 then
-               begin
-                 analogAxisF.BarVal.Width:=round(analogAxisF.Bar.Width * analogAxisDataReport.value / 65536);
-                 analogAxisF.BarVal.Left:=round(analogAxisF.Bar.Width/2);
-               end
-               else
-               begin
-                 analogAxisF.BarVal.Width:=round(-analogAxisF.Bar.Width * analogAxisDataReport.value / 65536);
-                 analogAxisF.BarVal.Left:=round(analogAxisF.Bar.Width/2)-analogAxisF.BarVal.Width;
-               end;
-             analogAxisF.Percent.Caption:=inttostr(round(analogAxisDataReport.value * 100 / 32768)) + '%';
+              analogAxisF.BarVal.Left:=0;
+              analogAxisF.BarVal.Width:=0;
+             analogAxisF.Percent.Caption:='0%';
            end;
 
           if (not analogAxisF.autolimit.Focused) then
@@ -717,6 +731,18 @@ begin
 end;
 
 //data change/save----------------------------------------------------------------------------------------
+
+procedure TMainForm.AxesMouseWheelDown(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+        TScrollbox(Sender).VertScrollBar.Position:= TScrollbox(Sender).VertScrollBar.Position+4;
+end;
+
+procedure TMainForm.AxesMouseWheelUp(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+         TScrollbox(Sender).VertScrollBar.Position:= TScrollbox(Sender).VertScrollBar.Position-4;
+end;
 
 procedure TMainForm.centerButtonSelect(Sender: TObject);
 begin
