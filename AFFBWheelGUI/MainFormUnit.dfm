@@ -100,11 +100,13 @@ object MainForm: TMainForm
               Height = 21
               TabOrder = 0
               Text = '900'
+              OnChange = steerRangeSelect
               OnSelect = steerRangeSelect
               Items.Strings = (
                 '180'
                 '270'
                 '360'
+                '540'
                 '720'
                 '900'
                 '1080')
