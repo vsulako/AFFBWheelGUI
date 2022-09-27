@@ -12,8 +12,8 @@ Allows to change controller settings.
 
 ### Download
 
-[Latest compiled binary (Windows x86)](https://github.com/vsulako/AFFBWheelGUI/releases/latest)
-[Last binary releases](https://github.com/vsulako/AFFBWheelGUI/releases)
+[Latest compiled binary (Windows x86)](https://github.com/vsulako/AFFBWheelGUI/releases/latest) <br>
+[Past binary releases](https://github.com/vsulako/AFFBWheelGUI/releases)
 
 ### Requirements for compiling
 
