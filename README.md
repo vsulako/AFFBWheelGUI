@@ -2,7 +2,7 @@
 
 [Описание на русском](./README_RU.md)
 
-Program (hereinafter GUI*) for changing controller settings [AFFBWheel](https://github.com/vsulako/AFFBWheel).
+Program (*hereinafter GUI*) for changing controller settings [AFFBWheel](https://github.com/vsulako/AFFBWheel).
 
 ## `Inputs` tab
 
@@ -58,7 +58,7 @@ The force varies periodically with time (square/triangular/sawtooth/sine wave), 
 
 *Example:* Some games may generate vibrations when the vehicle is damaged.
 
-####Spring:
+#### Spring:
 
 This is a force that increases depending on how far you are from a certain position on the wheel. The force depends on the position of the steering wheel.
 
