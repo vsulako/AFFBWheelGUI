@@ -1,8 +1,13 @@
 # AFFBWheelGUI
 
-[Описание на русском](./README_RU.md)
+[![Russian Federation](https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/ru.png "Russian Federation") Описание на русском](./README_RU.md)
 
 Program (*hereinafter GUI*) for changing controller settings [AFFBWheel](https://github.com/vsulako/AFFBWheel).
+
+## Download
+
+**[Latest compiled version (Windows x86)](https://github.com/vsulako/AFFBWheelGUI/releases/latest)** <br>
+**[Past Versions](https://github.com/vsulako/AFFBWheelGUI/releases)**
 
 ## `Inputs` tab
 
@@ -152,11 +157,6 @@ At the bottom of the window are buttons for saving and resetting to default sett
   *Normally, all settings are loaded automatically when you start the setup program and you do not need to press this button*.
 - **Save settings to EEPROM** - saves settings to the non-volatile memory of the controller, allows you to save settings when the controller is turned off. <br>
   *Don't forget to save the settings after changing and before powering off the controller*.
-
-## Download
-
-**[Latest compiled version (Windows x86)](https://github.com/vsulako/AFFBWheelGUI/releases/latest)** <br>
-**[Past Versions](https://github.com/vsulako/AFFBWheelGUI/releases)**
 
 ## Requirements for compiling
 
