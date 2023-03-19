@@ -1,8 +1,13 @@
 # AFFBWheelGUI
 
-[Description in English](/README.md)
+[![United States](https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/us.png "United States") Description in English](/README.md)
 
-Программа (*далее GUI*) для изменения настроек контроллера [AFFBWheel](https://github.com/vsulako/AFFBWheel).
+Программа (*далее GUI*) для изменения настроек контроллера [AFFBWheel](https://github.com/vsulako/AFFBWheel/blob/master/readme_rus.md).
+
+## Скачать
+
+**[Последняя скомпилированная версия (Windows x86)](https://github.com/vsulako/AFFBWheelGUI/releases/latest)** <br>
+**[Прошлые версии](https://github.com/vsulako/AFFBWheelGUI/releases)**
 
 ## Вкладка `Inputs`
 
@@ -152,11 +157,6 @@
   *Обычно все настройки загружаются автоматически при запуске программы настройки и не требуется нажимать эту кнопку*.
 - **Save settings to EEPROM** - сохраняет настройки в энергонезависимую память контроллера, позволяет сохранять настройки при отключении питания контроллера. <br>
   *Не забывайте сохранять настройки после изменения и до отключения питания контроллера*.
-
-## Скачать
-
-**[Последняя скомпилированная версия (Windows x86)](https://github.com/vsulako/AFFBWheelGUI/releases/latest)** <br>
-**[Прошлые версии](https://github.com/vsulako/AFFBWheelGUI/releases)**
 
 ## Требования для компиляции
 
