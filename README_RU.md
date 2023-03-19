@@ -2,7 +2,7 @@
 
 [![United States](https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/us.png "United States") Description in English](/README.md)
 
-Программа (*далее GUI*) для изменения настроек контроллера [AFFBWheel](https://github.com/vsulako/AFFBWheel).
+Программа (*далее GUI*) для изменения настроек контроллера [AFFBWheel](https://github.com/vsulako/AFFBWheel/blob/master/readme_rus.md).
 
 ## Скачать
 
